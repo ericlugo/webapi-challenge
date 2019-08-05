@@ -4,11 +4,10 @@ const validations = (module.exports = {});
 
 validations.validateProjectId = async function(request, response, next) {
   try {
-    const project_id = request.params.project_id;
-    const project = await projects.get(project_id);
+    const project = await projects.get(request.params.project_id);
 
     project
-      ? ((request.project_id = project_id), next())
+      ? ((request.project = request.params.project_id), next())
       : response.status(400).json({
           success: false,
           message: `Invalid Project ID`,
@@ -23,11 +22,10 @@ validations.validateProjectId = async function(request, response, next) {
 
 validations.validateActionId = async function(request, response, next) {
   try {
-    const action_id = request.params.action_id;
-    const action = await actions.get(action_id);
+    const action = await actions.get(request.params.action_id);
 
     action
-      ? ((request.action_id = action_id), next())
+      ? ((request.action = request.params.action_id), next())
       : response.status(400).json({
           success: false,
           message: `Invalid Action ID`,

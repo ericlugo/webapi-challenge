@@ -13,7 +13,7 @@ const { validateProject, validateAction, validateProjectId } = require('../middl
 const router = express.Router();
 
 router.post('/', validateProject, createProject);
-router.post('/:project_id/actions', validateAction, createAction);
+router.post('/:project_id/actions', validateProjectId, validateAction, createAction);
 router.get('/', getProjects);
 router.get('/:project_id', validateProjectId, getProject);
 router.get('/:project_id/actions', validateProjectId, getActions);
